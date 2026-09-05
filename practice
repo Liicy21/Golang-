@@ -1,0 +1,81 @@
+package main
+
+import (
+	"fmt"
+)
+
+// Person 是一个简单的结构体（类似其他语言的类）
+type Person struct {
+	Name string
+	Age  int
+}
+
+// Greet 是 Person 的方法，返回一句问候语
+func (p Person) Greet() string {
+	return fmt.Sprintf("你好，我是 %s，%d 岁。", p.Name, p.Age)
+}
+
+// add 是一个简单的函数，返回两个整数之和
+func add(a, b int) int {
+	return a + b
+}
+
+// safeDivide 演示函数如何返回多个值：结果 和 error
+func safeDivide(a, b int) (int, error) {
+	if b == 0 {
+		// 返回错误（使用 fmt.Errorf 构建 error）
+		return 0, fmt.Errorf("除数不能为 0")
+	}
+	return a / b, nil
+}
+
+func main() {
+	fmt.Println("简单的 Go 入门示例")
+
+	// 变量声明：显式和短声明
+	var x int = 10
+	y := 3
+	fmt.Println("x =", x, "y =", y)
+
+	// 调用函数
+	fmt.Println("x + y =", add(x, y))
+
+	// 条件判断
+	if x > y {
+		fmt.Println("x 大于 y")
+	} else {
+		fmt.Println("x 不大于 y")
+	}
+
+	// 切片（动态数组）与 append
+	nums := []int{1, 2, 3}
+	nums = append(nums, 4)
+	fmt.Println("nums:", nums)
+
+	// for + range 遍历切片
+	for i, v := range nums {
+		fmt.Printf("nums[%d] = %d\n", i, v)
+	}
+
+	// map（键值对）
+	counts := map[string]int{"apple": 2, "banana": 3}
+	counts["orange"] = 1
+	fmt.Println("counts:", counts)
+	if c, ok := counts["apple"]; ok {
+		fmt.Println("apple 的数量是", c)
+	}
+
+	// 结构体与方法
+	p := Person{Name: "小明", Age: 20}
+	fmt.Println(p.Greet())
+
+	// 错误处理示例（多个返回值）
+	if r, err := safeDivide(10, 2); err == nil {
+		fmt.Println("10 / 2 =", r)
+	} else {
+		fmt.Println("除法出错：", err)
+	}
+	if _, err := safeDivide(10, 0); err != nil {
+		fmt.Println("正确捕获到错误：", err)
+	}
+}
