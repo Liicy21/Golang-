@@ -31,7 +31,7 @@ func main() {
 	s5[2] = 100
 	fmt.Println("复制修改s5，s2不受影响:", s5)
 
-	//5.切片遍历
+	//5.切片遍历 range(i位索引，v为元素副本)
 	for i, v := range s2 {
 		fmt.Printf("下标%d，值%d\n", i, v)
 	}
